@@ -37,7 +37,6 @@ class HBNBCommand(cmd.Cmd):
 
     def precmd(self, line):
         """Reformat command line for advanced command syntax.
-
         Usage: <class name>.<command>([<id> [<*args> or <**kwargs>]])
         (Brackets denote optional fields in usage example.)
         """
@@ -115,28 +114,27 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-        new = args.split(" ")
-        if not new:
+        command= args.split(" ")
+        if not command:
             print("** class name missing **")
             return
-        elif new[0] not in HBNBCommand.classes:
+        elif command[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[new[0]]()
-
-        for i in range(1, len(new)):
-            first = new[i].split("=")
+        new_instance = HBNBCommand.classes[command[0]]()
+        for i in range(1, len(command)):
+            value = command[i].split("=")
             try:
-                if first[1][0] == "\"":
-                    first[1] = first[1].replace("\"", "")
-                    first[1] = first[1].replace("_", " ")
+                if value[1][0] == "\"":
+                    value[1] = value[1].replace("\"", "")
+                    value[1] = value[1].replace("_", " ")
 
-                elif "." in first[1]:
-                    first[1] = float(first[1])
+                elif "." in value[1]:
+                    value[1] = float(value[1])
 
                 else:
-                    first[1] = int(first[1])
-                setattr(new_instance, first[0], first[1])
+                    value[1] = int(value[1])
+                setattr(new_instance, value[0], value[1])
             except Exception:
                 continue
 
