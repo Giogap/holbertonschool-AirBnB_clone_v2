@@ -48,9 +48,11 @@ Execution
 Your shell should work like this in interactive mode:
 $ ./console.py
 (hbnb) help
+
 Documented commands (type help <topic>):
 ========================================
 EOF  help  quit
+
 (hbnb) 
 (hbnb) 
 (hbnb) quit
@@ -61,6 +63,7 @@ But also in non-interactive mode: (like the Shell project in C)
 ```
 $ echo "help" | ./console.py
 (hbnb)
+
 Documented commands (type help <topic>):
 ========================================
 EOF  help  quit
@@ -71,6 +74,7 @@ help
 $
 $ cat test_help | ./console.py
 (hbnb)
+
 Documented commands (type help <topic>):
 ========================================
 EOF  help  quit
@@ -131,6 +135,7 @@ help:
 ```
 ./console.py 
 (hbnb) help
+
 Documented commands (type help <topic>):
 ========================================
 EOF  all  create  destroy  help  quit  show  update
@@ -187,3 +192,4 @@ update:
 (hbnb) show BaseModel 683382c7-0351-4249-8987-ce2c42c0f1df
 [BaseModel] (683382c7-0351-4249-8987-ce2c42c0f1df) {'id': '683382c7-0351-4249-8987-ce2c42c0f1df', 'created_at': datetime.datetime(2022, 10, 29, 18, 39, 5, 144900), 'updated_at': datetime.datetime(2022, 10, 29, 18, 39, 5, 144949), 'first_name': '"Betty"'}
 ```
+
