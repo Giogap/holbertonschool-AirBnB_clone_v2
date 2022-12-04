@@ -1,1 +1,43 @@
-{"State.ab21d3e1-54e1-4f8c-a710-dff25425cd3b": {"id": "ab21d3e1-54e1-4f8c-a710-dff25425cd3b", "created_at": "2022-12-02T19:59:40.959441", "updated_at": "2022-12-02T19:59:40.959444", "__class__": "State"}, "State.0db3d5f6-70dd-4616-8a15-f0a04ace7c84": {"id": "0db3d5f6-70dd-4616-8a15-f0a04ace7c84", "created_at": "2022-12-02T19:59:40.959529", "updated_at": "2022-12-02T19:59:40.959530", "name": "California", "__class__": "State"}, "State.f05cd3fe-61d0-4391-b8c0-31620be9acfb": {"id": "f05cd3fe-61d0-4391-b8c0-31620be9acfb", "created_at": "2022-12-02T19:59:40.959740", "updated_at": "2022-12-02T19:59:40.959741", "name": "Nevada", "__class__": "State"}}
+{
+    "State.472ecd07-41a3-4884-a5ad-809ebe12ba12": {
+        "id": "472ecd07-41a3-4884-a5ad-809ebe12ba12",
+        "created_at": "2022-12-02T23:32:02.257411",
+        "updated_at": "2022-12-02T23:32:02.257414",
+        "__class__": "State"
+    },
+    "State.642c2382-d9f1-45e9-9d45-3513411633d0": {
+        "id": "642c2382-d9f1-45e9-9d45-3513411633d0",
+        "created_at": "2022-12-02T23:32:02.257689",
+        "updated_at": "2022-12-02T23:32:02.257691",
+        "__class__": "State"
+    },
+    "State.685f75c1-cfc7-4bb1-b362-7182b74cbc43": {
+        "id": "685f75c1-cfc7-4bb1-b362-7182b74cbc43",
+        "created_at": "2022-12-02T23:32:02.258651",
+        "updated_at": "2022-12-02T23:32:02.258675",
+        "name": "California",
+        "__class__": "State"
+    },
+    "State.c9038014-724d-4524-8900-c1b975edd897": {
+        "id": "c9038014-724d-4524-8900-c1b975edd897",
+        "created_at": "2022-12-02T23:32:02.259035",
+        "updated_at": "2022-12-02T23:32:02.259069",
+        "name": "Arizona",
+        "__class__": "State"
+    },
+    "Place.224d89dc-5b0d-4c13-92ba-9a4022100e3e": {
+        "id": "224d89dc-5b0d-4c13-92ba-9a4022100e3e",
+        "created_at": "2022-12-02T23:32:02.259509",
+        "updated_at": "2022-12-02T23:32:02.259565",
+        "city_id": "0001",
+        "user_id": "0001",
+        "name": "My little house",
+        "number_rooms": 4,
+        "number_bathrooms": 2,
+        "max_guest": 10,
+        "price_by_night": 300,
+        "latitude": 37.773972,
+        "longitude": -122.431297,
+        "__class__": "Place"
+    }
+}
