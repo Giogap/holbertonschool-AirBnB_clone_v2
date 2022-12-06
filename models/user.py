@@ -7,9 +7,7 @@ from sqlalchemy.orm import relationship
 
 
 class User(BaseModel, Base):
-    '''
-        Definition of the User class
-    '''
+    '''User class'''
     __tablename__ = "users"
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
