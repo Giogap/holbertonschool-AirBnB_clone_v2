@@ -2,7 +2,6 @@
 """ Console Module """
 import cmd
 import sys
-import shlex
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -21,16 +20,16 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
     classes = {
-        'BaseModel': BaseModel, 'User': User, 'Place': Place,
-        'State': State, 'City': City, 'Amenity': Amenity,
-        'Review': Review
-    }
+               'BaseModel': BaseModel, 'User': User, 'Place': Place,
+               'State': State, 'City': City, 'Amenity': Amenity,
+               'Review': Review
+              }
     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
     types = {
-        'number_rooms': int, 'number_bathrooms': int,
-        'max_guest': int, 'price_by_night': int,
-        'latitude': float, 'longitude': float
-    }
+             'number_rooms': int, 'number_bathrooms': int,
+             'max_guest': int, 'price_by_night': int,
+             'latitude': float, 'longitude': float
+            }
 
     def preloop(self):
         """Prints if isatty is false"""
@@ -116,35 +115,32 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-        if not args:
+        command = args.split(" ")
+        if not command:
             print("** class name missing **")
             return
-        params = args.split(" ")
-        if params[0] not in HBNBCommand.classes:
+        elif command[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        else:
-            new_instance = HBNBCommand.classes[params[0]]()
-            self.update_instance(params, new_instance)
-        storage.new(new_instance)
-        print(new_instance.id)
-        storage.save()
+        new_instance = HBNBCommand.classes[command[0]]()
+        for i in range(1, len(command)):
+            value = command[i].split("=")
+            try:
+                if value[1][0] == "\"":
+                    value[1] = value[1].replace("\"", "")
+                    value[1] = value[1].replace("_", " ")
 
-    def update_instance(self, args, instance):
-        """Transform a string in dictionary"""
-        for idx in range(1, len(args)):
-            key, value = args[idx].split('=')
-            if value[0] is value[-1] in ['"', "'"]:
-                value = value.strip("\"'").replace('_', ' ')
-            else:
-                try:
-                    value = int(value)
-                except ValueError:
-                    try:
-                        value = float(value)
-                    except ValueError:
-                        continue
-            setattr(instance, key, value)
+                elif "." in value[1]:
+                    value[1] = float(value[1])
+
+                else:
+                    value[1] = int(value[1])
+                setattr(new_instance, value[0], value[1])
+            except Exception:
+                continue
+
+        new_instance.save()
+        print(new_instance.id)
 
     def help_create(self):
         """ Help information for the create method """
@@ -207,7 +203,7 @@ class HBNBCommand(cmd.Cmd):
         key = c_name + "." + c_id
 
         try:
-            del (storage.all()[key])
+            del(storage.all()[key])
             storage.save()
         except KeyError:
             print("** no instance found **")
@@ -222,25 +218,18 @@ class HBNBCommand(cmd.Cmd):
         print_list = []
 
         if args:
-            arg = args.split(' ')[0]  # remove possible trailing args
-            if arg not in HBNBCommand.classes:
+            args = args.split(' ')[0]
+            if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            if os.getenv('HBNB_TYPE_STORAGE') == 'db':
-                for k, v in storage.all().items():
-                    if k.split('.')[0] == arg:
-                        print_list.append(str(v))
-            else:
-                for k, v in storage._FileStorage__objects.items():
-                    if k.split('.')[0] == arg:
-                        print_list.append(str(v))
+            dict = storage.all(HBNBCommand.classes[args])
+            for k, v in dict.items():
+                del v.__dict__['_sa_instance_state']
+                print_list.append(str(v))
         else:
-            if os.getenv('HBNB_TYPE_STORAGE') == 'db':
-                for k, v in storage.all().items():
-                    print_list.append(str(v))
-            else:
-                for k, v in storage._FileStorage__objects.items():
-                    print_list.append(str(v))
+            for k, v in storage.all().items():
+                del v.__dict__['_sa_instance_state']
+                print_list.append(str(v))
 
         print(print_list)
 
