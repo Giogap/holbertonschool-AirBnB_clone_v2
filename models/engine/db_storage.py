@@ -8,12 +8,14 @@ from models.user import User
 from models.state import State
 from models.city import City
 import os
-
+from models.place import Place
 
 classes = {
-            'User': User, """'Place': Place, 'Amenity': Amenity, 'Review': Review,"""
+            'User': User,
+            'Place': Place, """'Amenity': Amenity, 'Review': Review,"""
             'State': State, 'City': City
             }
+
 
 class DBStorage:
     """ Doc """
@@ -26,7 +28,8 @@ class DBStorage:
         pwd = os.getenv('HBNB_MYSQL_PWD')
         host = os.getenv('HBNB_MYSQL_HOST')
         db = os.getenv('HBNB_MYSQL_DB')
-        self.__engine = create_engine("mysql+mysqldb://{:s}:{:s}@{:s}/{:s}".format(
+        self.__engine = create_engine(
+            "mysql+mysqldb://{:s}:{:s}@{:s}/{:s}".format(
                                     user, pwd, host, db), pool_pre_ping=True)
 
         metaData = MetaData()
@@ -71,7 +74,6 @@ class DBStorage:
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.__session = Session
-
 
         def close(self):
             Session.close(self.__session)
